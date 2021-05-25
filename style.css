@@ -1,0 +1,24 @@
+header {
+  text-align: center;
+}
+.notes {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ccc;
+  margin: 15px;
+  padding: 10px;
+}
+button {
+  margin-right: 5px;
+}
+.add-content {
+  display: none;
+}
+.selected {
+  border: 1px solid blue;
+}
+
+.notes-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
