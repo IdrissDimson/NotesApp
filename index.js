@@ -102,7 +102,12 @@ function buttonListeners(index) {
   })
   // display the edit note section of the note
   editButton.addEventListener("click", function() {
-    addContent.style.display = "block";
+    if(addContent.style.display === "block"){
+      addContent.style.display = "none";
+    } else {
+      addContent.style.display = "block";
+    }
+    
   })
   // add the new text into the notes
   submitButton.addEventListener("click", function() {

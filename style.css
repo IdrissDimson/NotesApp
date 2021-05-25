@@ -1,24 +1,46 @@
+body {
+  background-color: #ece6d6;
+  font-family: 'Noto Sans JP', sans-serif;
+}
 header {
   text-align: center;
 }
+.notes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .notes {
+  display: flex;
+  flex-direction: column;
   width: 200px;
-  height: 200px;
+  min-height: 200px;
+
   border: 1px solid #ccc;
+  background-color: #f4f1e7;
   margin: 15px;
   padding: 10px;
 }
+.notes p {
+  max-height: 50%;
+  justify-content: center;
+  align-self: center;
+}
+
 button {
-  margin-right: 5px;
+  margin-bottom: 5px;
+  background-color: #eee;
+  border-radius: 25px;
+  height: 30px;
+  border: 1px solid #333;
+}
+button:hover{
+  cursor: pointer;
+  background-color: #bbb;
 }
 .add-content {
   display: none;
 }
 .selected {
   border: 1px solid blue;
-}
-
-.notes-grid {
-  display: flex;
-  flex-wrap: wrap;
 }
