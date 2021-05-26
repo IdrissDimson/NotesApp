@@ -6,8 +6,8 @@ let addNotes = document.getElementById("add-notes");
 let notesGrid = document.getElementById("grid-notes");
 let notesArray = document.getElementsByClassName("notes");
 
-addNotes.addEventListener("click", function() {
-  if(counter < 7774){ // if the counter doesn't exceeds the limit of 7774 notes ...
+addNotes.addEventListener("click", function () {
+  if (counter < 7774) { // if the counter doesn't exceeds the limit of 7774 notes ...
     counter++;
     createNewNotes(counter);
     buttonListeners(counter);
@@ -40,7 +40,7 @@ function createNewNotes(index) {
   para.innerText = `Note #${index.toString()}`;
   para.setAttribute("id", `notes-content-${index.toString()}`);
   contentPara.innerText = "Edit Notes Text";
-  
+
   editButton.setAttribute("id", `notes-edit-${index.toString()}`);
   editButton.innerText = "Edit Note";
 
@@ -52,7 +52,7 @@ function createNewNotes(index) {
 
   contentTextArea.setAttribute("maxlength", "255");
   contentTextArea.setAttribute("id", `new-notes-content-${index.toString()}`);
-  
+
   // adding the elements to the notes div and then the page itself
   notesDiv.appendChild(para);
   notesDiv.appendChild(editButton);
@@ -67,11 +67,12 @@ function createNewNotes(index) {
 }
 
 function buttonListeners(index) {
+  //listens for clicks on the textarea
+  let newContent = document.getElementById(`new-notes-content-${index.toString()}`);
   // listens for clicks on the buttons
   let submitButton = document.getElementById(`notes-submit-${index.toString()}`);
   let notesContent = document.getElementById(`notes-content-${index.toString()}`);
 
-  let newContent = document.getElementById(`new-notes-content-${index.toString()}`);
   let editButton = document.getElementById(`notes-edit-${index.toString()}`);
   let addContent = document.getElementById(`edit-notes-div-${index.toString()}`);
   let notesDiv = document.getElementById(`add-notes-${index.toString()}`);
@@ -81,15 +82,15 @@ function buttonListeners(index) {
   // if the div is selected, highlight the note. If another div was selected
   // previously, deselect the divs and have the new note replace its note content
   // with the old notes content. if the user selected the same div, deselect the note.
-  notesDiv.addEventListener("click", function() {
-    if(selected){
+  notesDiv.addEventListener("click", function () {
+    if (selected) {
       notesDiv.classList.remove('selected');
       oldDiv.classList.remove('selected');
       let targetNote = document.getElementById(`notes-content-${index.toString()}`);
-      if(targetNote === initialNote){
+      if (targetNote === initialNote) {
         selected = false;
       } else {
-        let secondText  = targetNote.innerText;
+        let secondText = targetNote.innerText;
         targetNote.innerText = initialNote.innerText;
         initialNote.innerText = secondText;
         selected = false;
@@ -103,26 +104,34 @@ function buttonListeners(index) {
     }
   })
   // display the edit note section of the note
-  editButton.addEventListener("click", function() {
-    if(addContent.style.display === "block"){
+  editButton.addEventListener("click", function (e) {
+    e.stopPropagation(); // Prevent the "bubbling" effect of having the buttons trigger the parent div click behaviors
+    if (addContent.style.display === "block") {
       addContent.style.display = "none";
     } else {
       addContent.style.display = "block";
     }
-    
   })
   // add the new text into the notes
-  submitButton.addEventListener("click", function() {
+  submitButton.addEventListener("click", function (e) {
+    e.stopPropagation(); // Prevent the "bubbling" effect of having the buttons trigger the parent div click behaviors
     addNewText(newContent, notesContent, addContent);
+    selected = false;
   });
   // delete the note from the page
-  deleteNote.addEventListener("click", function() {
+  deleteNote.addEventListener("click", function (e) {
+    e.stopPropagation(); // Prevent the "bubbling" effect of having the buttons trigger the parent div click behaviors
     notesDiv.parentNode.removeChild(notesDiv);
+    selected = false;
+  })
+  newContent.addEventListener("click", function (e) {
+    e.stopPropagation();
   })
 }
+
 // add the text from the textarea to the note's content p, as well as hides the textarea.
 function addNewText(contentDiv, targetDiv, currentDiv) {
-  targetDiv.innerText =  contentDiv.value;
+  targetDiv.innerText = contentDiv.value;
   contentDiv.value = "";
   currentDiv.style.display = "none";
 }
