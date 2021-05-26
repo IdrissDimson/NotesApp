@@ -89,7 +89,9 @@ function buttonListeners(index) {
       if(targetNote === initialNote){
         selected = false;
       } else {
+        let secondText  = targetNote.innerText;
         targetNote.innerText = initialNote.innerText;
+        initialNote.innerText = secondText;
         selected = false;
         oldDiv = null;
       }
